@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.egg-info/
+config/calib/
+recordings/
+*.local.json

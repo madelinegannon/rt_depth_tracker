@@ -1,0 +1,21 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: sudo apt-get update && sudo apt-get install -y xvfb libgl1 libglu1-mesa libxkbcommon0
+      - run: python -m pip install --upgrade pip
+      - run: pip install -e .[viewer]
+      - run: xvfb-run -a python tests/run_all.py

@@ -1,0 +1,124 @@
+# Lula robot descriptor for the UFACTORY 850 (uf850).
+# Modeled on the shipped UR10e descriptor; retargeted to uf850 joints/links.
+# cspace joint names MUST match lula_uf850.urdf AND the USD articulation dof names.
+
+api_version: 1.0
+
+# Generalized coordinates RMPflow controls (order matters).
+cspace:
+    - joint1
+    - joint2
+    - joint3
+    - joint4
+    - joint5
+    - joint6
+
+# Root of the kinematic chain in lula_uf850.urdf.
+root_link: link_base
+
+# Default / null-space rest pose (all within joint limits; note joint3 upper limit ~0.061).
+default_q: [0.0, 0.26, -0.9, 0.0, 0.6, 0.0]
+
+acceleration_limits: [40.0, 40.0, 40.0, 40.0, 40.0, 40.0]
+jerk_limits: [10000.0, 10000.0, 10000.0, 10000.0, 10000.0, 10000.0]
+
+# Maps unspecified/auxiliary coordinates; none for uf850 (no passive/gripper joints).
+cspace_to_urdf_rules:
+
+# Link-frame spheres fitted to the USD collision meshes (tests/test_collision_model.py); the tracker masks with the same set.
+collision_spheres:
+  - link_base:
+    - "center": [0.0, 0.0, 0.10]
+      "radius": 0.08
+    - "center": [0.0, 0.0, 0.20]
+      "radius": 0.08
+    - "center": [0.0, 0.0, 0.30]
+      "radius": 0.075
+    - "center": [0.0, 0.0, 0.02]      # mounting flange
+      "radius": 0.095
+  - link1:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.075
+    - "center": [0.0, 0.0, -0.06]
+      "radius": 0.07
+    - "center": [0.0, 0.0, -0.12]
+      "radius": 0.065
+    - "center": [0.0, 0.055, 0.0]     # J2 housing, out along +y
+      "radius": 0.065
+    - "center": [0.0, 0.09, 0.0]
+      "radius": 0.065
+    - "center": [0.0, 0.07, -0.06]
+      "radius": 0.065
+  - link2:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.07
+    - "center": [0.10, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.20, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.30, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.39, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.0, 0.0, 0.065]     # both ends of the upper arm sit beside the joint plane
+      "radius": 0.07
+    - "center": [0.075, 0.0, 0.05]
+      "radius": 0.065
+    - "center": [0.15, 0.0, 0.02]
+      "radius": 0.06
+    - "center": [0.25, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.325, 0.0, 0.05]
+      "radius": 0.06
+    - "center": [0.39, 0.0, 0.065]
+      "radius": 0.065
+  - link3:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.075, 0.0, 0.0]     # the forearm is an L: 0.15 m stub, then 0.426 m
+      "radius": 0.06
+    - "center": [0.15, 0.0, 0.0]
+      "radius": 0.06
+    - "center": [0.15, 0.055, 0.0]
+      "radius": 0.065
+    - "center": [0.15, 0.1065, 0.0]
+      "radius": 0.055
+    - "center": [0.15, 0.16, 0.0]
+      "radius": 0.055
+    - "center": [0.15, 0.213, 0.0]
+      "radius": 0.055
+    - "center": [0.15, 0.266, 0.0]
+      "radius": 0.055
+    - "center": [0.15, 0.3195, 0.0]
+      "radius": 0.055
+    - "center": [0.15, 0.426, 0.0]
+      "radius": 0.055
+    - "center": [0.0, 0.0, 0.075]     # J3 housing, out along +z
+      "radius": 0.065
+    - "center": [0.06, 0.0, 0.05]
+      "radius": 0.055
+    - "center": [0.08, 0.045, 0.02]
+      "radius": 0.06
+  - link4:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.055
+    - "center": [0.0, 0.0, -0.05]
+      "radius": 0.05
+    - "center": [0.0, -0.08, 0.0]     # wrist yoke, beside the wrist along -y
+      "radius": 0.06
+    - "center": [0.0, -0.08, -0.06]
+      "radius": 0.06
+    - "center": [0.0, -0.045, -0.115]
+      "radius": 0.055
+  - link5:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.05
+    - "center": [0.0, -0.045, 0.0]
+      "radius": 0.05
+    - "center": [0.0, -0.09, 0.0]
+      "radius": 0.05
+    - "center": [0.0, 0.04, 0.0]      # back of the J5 housing
+      "radius": 0.05
+  - link6:
+    - "center": [0.0, 0.0, 0.0]
+      "radius": 0.045
